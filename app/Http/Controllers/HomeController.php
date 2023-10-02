@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
 
 class HomeController extends Controller
@@ -27,7 +26,10 @@ class HomeController extends Controller
         // redirect to dashboard if user is admin or doctor
         if (Auth::user()->role->name == 'admin' || Auth::user()->role->name == 'doctor') {
             return redirect()->to('/dashboard');
-        };
-        return view('home');
+        }
+        elseif(Auth::user()->role->name == 'patient'){
+            return view('home');
+        }
+        return redirect()->to('/login');
     }
 }
