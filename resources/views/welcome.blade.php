@@ -15,31 +15,9 @@
             </div>
         </div>
 
-        {{-- Input --}}
-        <form action="{{ url('/') }}" method="GET">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-header">Find Doctors</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-8">
-                                <input type="date" name='date' id="datepicker" class='form-control'>
-                            </div>
-                            <div class="col-md-6 col-sm-4">
-                                <button class="btn btn-primary" type="submit">Go</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
         {{-- Display doctors --}}
         <div class="card">
             <div class="card-body">
-                <div class="card-header">List of Doctors Available: @isset($formatDate) {{ $formatDate }}
-                    @endisset
-                </div>
                 <div class="card-body table-responsive-sm">
                     <table class="table table-striped">
                         <thead>
@@ -55,10 +33,11 @@
                             @forelse ($doctors as $key=>$doctor)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td><img src="{{ asset('images') }}/{{ $doctor->doctor->image }}" alt="doctor photo"
-                                            width="100px"></td>
-                                    <td>{{ $doctor->doctor->name }}</td>
-                                    <td>{{ $doctor->doctor->department }}</td>
+                                    <td><img src="{{ asset('images') }}/{{ $doctor->image }}" class="table-user-thumb" width="50" height="50" style="border-radius:50%"
+                                                alt="">
+                                        </td>
+                                    <td>{{ $doctor->name }}</td>
+                                    <td>{{ $doctor->department }}</td>
                                     @if (Auth::check() && auth()->user()->role->name == 'patient')
                                         <td>
                                             <a href="{{ route('create.appointment', [$doctor->user_id, $doctor->date]) }}"><button
