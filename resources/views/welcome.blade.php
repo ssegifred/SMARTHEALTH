@@ -39,7 +39,7 @@
         {{-- Display doctors --}}
         <div class="card">
             <div class="card-body">
-                <div class="card-header">List of Doctors Available: @isset($formatDate) {{ $formatDate }}
+                <div class="card-header">List of Doctors Registered with S-H-C: @isset($formatDate) {{ $formatDate }}
                     @endisset
                 </div>
                 <div class="card-body table-responsive-sm">
