@@ -12,11 +12,16 @@ use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $doctors = User::get()->where('role_id', 1); // Replace 'Doctor' with your actual model name.
-
-    return view('welcome', compact('doctors'));
+        // Set timezone
+        date_default_timezone_set('Africa/Nairobi');
+        $doctors = Appointment::where('date', date('m-d-Y'))->get();
+        // $doctors=[];
+        // foreach ($appointments as $key => $appointment) {
+        //     $doctors[] = User::find($appointment->user_id);
+        // }
+        return view('welcome', compact('doctors'));
     }
 
     public function show($doctorId, $date)
@@ -31,7 +36,7 @@ class FrontEndController extends Controller
     public function store(Request $request)
     {
         // Set timezone
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set('Africa/Nairobi');
 
         $request->validate(['time' => 'required']);
         $check = $this->checkBookingTimeInterval();
