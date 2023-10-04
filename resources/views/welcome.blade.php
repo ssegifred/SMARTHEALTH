@@ -4,8 +4,7 @@
     <div class="container">
         <div class="row mb-4 justify-content-center">
             <div class="col-md-8">
-                <h1>YOUR WELCOME</h1>
-                <h4>Book your appointment today!</h4>
+              
                
                 @guest
                     <div class="mt-5">
@@ -16,31 +15,9 @@
             </div>
         </div>
 
-        {{-- Input --}}
-        <form action="{{ url('/') }}" method="GET">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-header">Find Doctors</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-8">
-                                <input type="date" name='date' id="datepicker" class='form-control'>
-                            </div>
-                            <div class="col-md-6 col-sm-4">
-                                <button class="btn btn-primary" type="submit">Go</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
         {{-- Display doctors --}}
         <div class="card">
             <div class="card-body">
-                <div class="card-header">List of Doctors Registered with S-H-C: @isset($formatDate) {{ $formatDate }}
-                    @endisset
-                </div>
                 <div class="card-body table-responsive-sm">
                     <table class="table table-striped">
                         <thead>
@@ -53,16 +30,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($doctors as $key=>$doctor)
+                            @forelse ($doctors as $key=>$data)
+                            @php
+                                $doctor = $data['doctor'];
+                                $appointment = $data['appointment'];
+                            @endphp
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td><img src="{{ asset('images') }}/{{ $doctor->doctor->image }}" alt="doctor photo"
-                                            width="100px"></td>
-                                    <td>{{ $doctor->doctor->name }}</td>
-                                    <td>{{ $doctor->doctor->department }}</td>
+                                    <td><img src="{{ asset('images') }}/{{ $doctor->image }}" class="table-user-thumb" width="50" height="50" st
+                                                alt="">
+                                        </td>
+                                    <td>{{ $doctor->name }}</td>
+                                    <td>{{ $doctor->department }}</td>
                                     @if (Auth::check() && auth()->user()->role->name == 'patient')
                                         <td>
-                                            <a href="{{ route('create.appointment', [$doctor->user_id, $doctor->date]) }}"><button
+                                        <a href="{{ route('create.appointment', [$appointment->user_id, $appointment->date]) }}"><button
                                                     class="btn btn-primary">Appointment</button></a>
                                         </td>
                                     @else

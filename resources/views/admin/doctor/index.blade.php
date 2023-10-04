@@ -48,8 +48,8 @@
                                 <th>Address</th>
                                 <th>Phone number</th>
                                 <th>Department</th>
-                                <th class="nosort">&nbsp;</th>
-                                <th class="nosort">&nbsp;</th>
+                                <th class="sort">&nbsp;</th>
+                                <th class="sort">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>

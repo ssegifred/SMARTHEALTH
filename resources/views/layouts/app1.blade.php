@@ -21,8 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="bg-image" style="background-image: url('expect/hospital2.jpg'); background-size:  100% 100%; background-repeat: no-repeat; background-position: center; background-attachment: fixed;">
-
+<body >
     
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
