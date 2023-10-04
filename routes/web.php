@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 // Home Page Routes
-Route::get('/', 'FrontEndController@index');
+Route::get('/welcome', 'FrontEndController@index');
+Route::get('/','LandingController@index');
 Route::get('/new-appointment/{doctorId}/{date}', 'FrontEndController@show')->name('create.appointment');
 
 Route::get('/dashboard', 'DashBoardController@index');
