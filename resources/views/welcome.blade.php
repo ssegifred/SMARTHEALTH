@@ -30,7 +30,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($doctors as $key=>$doctor)
+                            @forelse ($doctors as $key=>$data)
+                            @php
+                                $doctor = $data['doctor'];
+                                $appointment = $data['appointment'];
+                            @endphp
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><img src="{{ asset('images') }}/{{ $doctor->image }}" class="table-user-thumb" width="50" height="50" st
@@ -40,9 +44,8 @@
                                     <td>{{ $doctor->department }}</td>
                                     @if (Auth::check() && auth()->user()->role->name == 'patient')
                                         <td>
-                                        <a href="{{ isset($doctor->user_id) && isset($doctor->date) ? route('create.appointment', [$doctor->user_id, $doctor->date]) : '#' }}">
-                                            <button class="btn btn-primary">Appointment</button>
-                                        </a>
+                                        <a href="{{ route('create.appointment', [$appointment->user_id, $appointment->date]) }}"><button
+                                                    class="btn btn-primary">Appointment</button></a>
                                         </td>
                                     @else
                                         <td>For patients ONLY</td>

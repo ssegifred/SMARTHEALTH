@@ -16,11 +16,18 @@ class FrontEndController extends Controller
     {
         // Set timezone
         date_default_timezone_set('Africa/Nairobi');
-        $doctors = Appointment::where('date', date('m-d-Y'))->get();
-        // $doctors=[];
-        // foreach ($appointments as $key => $appointment) {
-        //     $doctors[] = User::find($appointment->user_id);
-        // }
+        $appointments = Appointment::where('date', date('m-d-Y'))->get();
+        $doctors=[];
+        foreach ($appointments as $key => $appointment) {
+            $doctor = User::find($appointment->user_id);
+            if ($doctor) {
+                $doctors[] = [
+                    'doctor' => $doctor,
+                    'appointment' => $appointment,
+                ];
+
+        }
+    }
         return view('welcome', compact('doctors'));
     }
 
