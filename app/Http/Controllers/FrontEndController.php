@@ -2,29 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Appointment;
+use App\Booking;
+use App\Mail\AppointmentMail;
+use App\Prescription;
 use App\Time;
 use App\User;
-use App\Booking;
-use App\Prescription;
-use App\Mail\AppointmentMail;
+use Illuminate\Http\Request;
 
 class FrontEndController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Set timezone
-        date_default_timezone_set('America/New_York');
-        // If there is set date, find the doctors
-        if (request('date')) {
-            $formatDate = date('m-d-yy', strtotime(request('date')));
-            $doctors = Appointment::where('date', $formatDate)->get();
-            return view('welcome', compact('doctors', 'formatDate'));
-        };
-        // Return all doctors avalable for today to the welcome page
-        $doctors = Appointment::where('date', date('m-d-yy'))->get();
-        return view('welcome', compact('doctors'));
+        $doctors = User::get()->where('role_id', 1); // Replace 'Doctor' with your actual model name.
+
+    return view('welcome', compact('doctors'));
     }
 
     public function show($doctorId, $date)
